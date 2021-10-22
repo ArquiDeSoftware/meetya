@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+**/__reactpreview__
 .pnp.js
 
 # testing
