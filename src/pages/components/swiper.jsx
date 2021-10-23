@@ -1,7 +1,7 @@
 import React from "react";
 import DateDisplay from "./date_display";
 
-export default function Swiper() {
+export default function Swiper({ trip }) {
   return (
     <div class='container'>
       <div class='card'>
