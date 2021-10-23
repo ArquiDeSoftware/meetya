@@ -1,9 +1,10 @@
 import Match from "./Match";
+import MatchCache from "./MatchCache";
 
 class MatchProvider implements Match {
     cache: MatchCache;
 
-    get_matches(): string {
+    getMatches(): string {
         return "what  up";
     }
 

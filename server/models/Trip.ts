@@ -1,3 +1,4 @@
+import { uuid } from "./types";
 
 class Trip {
 

@@ -1,3 +1,4 @@
+import { uuid } from "./types";
 
 class User {
   private user_uuid: uuid;
@@ -23,7 +24,7 @@ class User {
   }
 
   get_email(): string {
-    return this.email;;
+    return this.email;
   }
 
   get_gender(): string {

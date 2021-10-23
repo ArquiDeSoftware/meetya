@@ -6,10 +6,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn start:client`
+
+Runs the client side app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn start:server`
+
+Runs the server side app in the development mode.\
+Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the server and client sides app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view client in the browser.
+
+Open [http://localhost:9000](http://localhost:9000) to view server in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.

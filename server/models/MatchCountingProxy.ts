@@ -3,12 +3,12 @@ import MatchProvider from "./MatchProvider";
 
 class MatchCountingProxy implements Match {
 
-    private sucessful_matching_count: Number;
-    private total_matching_queries: Number;
+    private sucessful_matching_count: number;
+    private total_matching_queries: number;
     private mp : MatchProvider;
 
     getMatches(): string {
-        return this.mp.get_matches();
+        return this.mp.getMatches();
     }
 }
 
