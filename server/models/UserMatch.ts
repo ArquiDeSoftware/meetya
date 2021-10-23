@@ -1,4 +1,3 @@
-import { RandomUUIDOptions } from "crypto";
 
 class UserMatch {
     public user_uuid: uuid;
