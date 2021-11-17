@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { addUser } from '../controllers/userController'
 import { addTrip } from '../controllers/tripController'
+import { addMatchCountingProxy } from '../controllers/matchCountingProxyController'
 
 const api = Router();
 
@@ -8,6 +9,7 @@ const api = Router();
 
 api.post('/users', addUser)
 api.post('/trips', addTrip)
+api.post('/matchCountingProxy', addMatchCountingProxy)
 
 api.get('/', (req, res) => {
     res.send('Welcome to APIs!');
