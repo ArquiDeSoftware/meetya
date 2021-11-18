@@ -24,7 +24,6 @@ api.get('/getMatchCountingProxy', getMatchCountingProxy)
 // user match
 api.post('/userMatch', addUserMatch)
 api.post('/getUserMatches', getUserMatches)
-// match cache
 api.get('/getMatchCacheByTripUUID', getMatchCache)
 api.get('/getAllMatchCaches', getAllMatchCaches)
 api.post('/addMatchCache', addMatchCache)
