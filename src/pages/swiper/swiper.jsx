@@ -5,10 +5,10 @@ import DateDisplay from "../components/date_display";
 export default function Swiper({ trip }) {
   return (
     <>
-    <a href='#' class='col btn btn-crear-trip'>
+    <a href='/createTrip' class='col btn btn-crear-trip'>
       Crear Trip
     </a>
-    <a href='/createTrip' class='col btn btn-matches'>
+    <a href='#' class='col btn btn-matches'>
       Matches
     </a>
     <h1>MeetYa</h1>
