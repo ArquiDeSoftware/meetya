@@ -1,6 +1,6 @@
 import Match from "./Match";
-import MatchProvider from "./MatchProvider";
-const mongoose = require('mongoose')
+// import MatchProvider from "./MatchProvider";
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema 
 

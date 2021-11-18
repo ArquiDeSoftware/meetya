@@ -1,13 +1,28 @@
 import Match from "./Match";
 import MatchCache from "./MatchCache";
 
-class MatchProvider implements Match {
-    cache: MatchCache;
+const mongoose = require('mongoose')
 
-    getMatches(): string {
-        return "what  up";
+const Schema = mongoose.Schema 
+
+const MatchProviderSchema = new Schema(
+    {
+        cache_id : String
+    },
+    {
+        timestamps: true 
     }
+)
 
-}
+module.exports = mongoose.model('MatchProvider', MatchProviderSchema);
 
-export default MatchProvider;
+// class MatchProvider implements Match {
+//     cache: MatchCache;
+
+//     getMatches(): string {
+//         return "what  up";
+//     }
+
+// }
+
+// export default MatchProvider;
