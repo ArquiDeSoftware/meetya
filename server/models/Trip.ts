@@ -6,8 +6,7 @@ const Schema = mongoose.Schema
 
 const TripSchema = new Schema(
     {
-        trip_uuid: String,
-        user_uuid: String,
+        username: String,
         destination: String,
         activities_preference: { 
             type: Map, 
@@ -17,7 +16,8 @@ const TripSchema = new Schema(
             type: Map, 
             of: String
         },
-        date_range: [String] // could be changed to array or map of dates
+        start_date: Date,
+        end_date: Date // could be changed to array or map of dates
     },
     { timestamps: true }
 );
