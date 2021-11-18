@@ -28,4 +28,13 @@ async function addUser(req, res) {
     }
 }
 
-export { addUser };
+async function getAllUsers(req, res) {
+    try {
+        const allUsers = await User.find({}).lean().exec()
+        res.status(200).send(allUsers)
+    } catch (e) {
+        res.status(500).send({ message : e.message })
+    }
+}
+
+export { addUser, getAllUsers };
