@@ -1,14 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import { Form, FloatingLabel, Row, Col } from "react-bootstrap";
 import "./create_trip.css";
 export default function CreateTrip() {
+
+  const [values, setValues] = useState({});
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(values);
+  };
+
+  const handleChange = (e) => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.type ==='checkbox' ? target.value : target.name;
+    setValues({ ...values, [name]: value });
+  };
+
   return (
     <>
       <link rel='stylesheet' href='create_trip.css'></link>
       <div class='container'>
         <div class='text-center card'>
           <div class='container form-signin bg-light'>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <h1 class='h3 mb-3 fw-normal'>Create your next trip! </h1>
 
               <div class='form-floating'>
@@ -17,6 +32,8 @@ export default function CreateTrip() {
                   class='form-control'
                   id='floatingLocation'
                   placeholder='Dream location'
+                  name='location'
+                  onChange={handleChange}
                 />
                 <label class='text-secondary' for='floatingLocation'>
                   Location
@@ -38,7 +55,12 @@ export default function CreateTrip() {
                     className='mb-3'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='10' />
+                    <Form.Control
+                      type='number'
+                      placeholder='10'
+                      name='day-begin'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                   <FloatingLabel
                     controlId='floatingInput'
@@ -46,7 +68,12 @@ export default function CreateTrip() {
                     className='mb-3'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='02' />
+                    <Form.Control
+                      type='number'
+                      placeholder='02'
+                      name='month-begin'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                   <FloatingLabel
                     controlId='floatingInput'
@@ -54,10 +81,15 @@ export default function CreateTrip() {
                     className='mb-3 ml-2'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='2022' />
+                    <Form.Control
+                      type='number'
+                      placeholder='2022'
+                      name='year-begin'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                 </Row>
-                
+
                 <br></br>
                 <p>Last Date Available: </p>
                 <Row>
@@ -67,7 +99,12 @@ export default function CreateTrip() {
                     className='mb-3'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='10' />
+                    <Form.Control
+                      type='number'
+                      placeholder='10'
+                      name='day-end'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                   <FloatingLabel
                     controlId='floatingInput'
@@ -75,7 +112,12 @@ export default function CreateTrip() {
                     className='mb-3'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='02' />
+                    <Form.Control
+                      type='number'
+                      placeholder='02'
+                      name='month-end'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                   <FloatingLabel
                     controlId='floatingInput'
@@ -83,92 +125,125 @@ export default function CreateTrip() {
                     className='mb-3 ml-2'
                     as={Col}
                   >
-                    <Form.Control type='number' placeholder='2022' />
+                    <Form.Control
+                      type='number'
+                      placeholder='2022'
+                      name='year-end'
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
                 </Row>
               </div>
-              <br></br>
 
-              <div class=''>
+              <div class='mt-4'>
                 <label class='text-secondary' for='floatingPGenero'>
                   Gender Preference
                 </label>
                 <br></br>
-                <div key='radio-gender'>
-                  <Form.Check type='radio' name='gender' id='gender-men' label='Men' />
-                  <Form.Check type='radio' name='gender' id='gender-women' label='Women' />
+                <div key='radio-gender' onChange={handleChange}>
                   <Form.Check
-                    type='radio' name='gender'
+                    type='radio'
+                    name='gender'
+                    id='gender-men'
+                    label='Men'
+                    value='Men'
+                    />
+                  <Form.Check
+                    type='radio'
+                    name='gender'
+                    id='gender-women'
+                    label='Women'
+                    value='Women'
+                  />
+                  <Form.Check
+                    type='radio'
+                    name='gender'
                     id='gender-nonbinary'
                     label='Non-binary'
+                    value='Non-binary'
                   />
                 </div>
-                <br></br>
               </div>
-              <br></br>
 
-              <div class='form-floating mt-3'>
-                <input
-                  type='number'
-                  class='form-control'
-                  id='eMin'
-                  placeholder='Min'
-                />
-                <label class='text-secondary' for='floatingPAge'>
+                <label class='mt-4 text-secondary' for='floatingPAge'>
                   Age Preference
-                </label>
-                <br></br>
-
-                <input
-                  type='number'
-                  class='form-control'
-                  id='eMax'
-                  placeholder='Max'
-                />
-              </div>
-              <br></br>
+              </label>
+              <Row>
+                  <FloatingLabel
+                    controlId='floatingInput'
+                    label='From'
+                    className='mb-3'
+                    as={Col}
+                  >
+                    <Form.Control
+                      type='number'
+                      placeholder='20'
+                      name='age-min'
+                      onChange={handleChange}
+                    />
+                  </FloatingLabel>
+                  <FloatingLabel
+                    controlId='floatingInput'
+                    label='To'
+                    className='mb-3'
+                    as={Col}
+                  >
+                    <Form.Control
+                      type='number'
+                      placeholder='30'
+                      name='age-max'
+                      onChange={handleChange}
+                    />
+                  </FloatingLabel>
+                  </Row>              
 
               <div class=' mt-4'>
                 <label class='mx-2 text-secondary' for='floatingPActivities'>
                   Activities Preference
                 </label>
                 <br></br>
-                <div key='radio-activities'>
+                <div key='radio-activities' name='activities' onChange={handleChange}>
                   <Form.Check
                     type='checkbox'
-                    name='activities-landmarks'
+                    name='activities'
                     id='activities-landmarks'
                     label='Landmarks'
+                    value='Landmarks'
                   />
                   <Form.Check
                     type='checkbox'
-                    name='activities-tours'
+                    name='activities'
                     id='activities-tours'
                     label='Tours'
+                    value='Tours'
                   />
                   <Form.Check
                     type='checkbox'
-                    name='activities-cultural'
+                    name='activities'
                     id='activities-cultural'
                     label='Cultural'
+                    value='Cultural'
                   />
                   <Form.Check
                     type='checkbox'
-                    name='activities-party'
+                    name='activities'
                     id='activities-party'
                     label='Party'
+                    value='Party'
                   />
                   <Form.Check
                     type='checkbox'
-                    name='activities-localCuisine'
+                    name='activities'
                     id='activities-localCuisine'
                     label='Local Cuisine'
+                    value='Local Cuisine'
                   />
                   <Form.Check
                     type='checkbox'
-                    name='activities-outdoors'
+                    name='activities'
                     id='activities-outdoors'
                     label='Outdoors'
+                    value='Outdoors'
                   />
                 </div>
               </div>
