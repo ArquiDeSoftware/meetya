@@ -23,10 +23,18 @@ const addUserMatch = async (req, res) => {
     }
 }
 
+function dateRangeOverlaps(a_start, a_end, b_start, b_end) {
+    if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+    if (a_start <= b_end   && b_end   <= a_end) return true; // b ends in a
+    if (b_start <  a_start && a_end   <  b_end) return true; // a in b
+    return false;
+}
+
 // falta agregar que no sea el mismo usuario, y que compartan date range, para los resulting users regresar sus puntos de contacto
 const getUserMatches = async (req, res) => {
     try {
         const {
+            username,
             gender_preference,
             destination,
             activities_preference,
@@ -36,10 +44,9 @@ const getUserMatches = async (req, res) => {
 
         const userMatches = await 
             User
-            .find({}, 'username gender points_of_contact trip_wishlist')
+            .find({username: {$ne: username} }, 'username gender points_of_contact trip_wishlist')
             .lean()
             .exec()
-
         // match gender preference
         const userMatchesWithGenderPreference = userMatches
             .filter(user => user.gender in gender_preference)
@@ -54,7 +61,7 @@ const getUserMatches = async (req, res) => {
             .exec()
         // filter on gender preference users
         const tripsForMatchingUsers = allTrips
-            .filter(trip => userMatchesHandles.has(trip.user_uuid))
+            .filter(trip => userMatchesHandles.has(trip.username))
         // filter trips on activities
         const tripsWithMatchingActivities = tripsForMatchingUsers
             .filter(trip => {
@@ -63,8 +70,16 @@ const getUserMatches = async (req, res) => {
                 return intersection.length > 0
             })
         // match date
-
-        res.status(200).send(tripsWithMatchingActivities)
+        const usersWithMatchingDates = tripsWithMatchingActivities
+            .map(trip => {return {username : trip.username, start_date : trip.start_date, end_date : trip.end_date}})
+            .filter(trip => dateRangeOverlaps(trip.start_date, trip.end_date, new Date(start_date), new Date(end_date)))
+            .map(trip => trip.username)
+        const finalUserMatchSet = new Set(usersWithMatchingDates)
+        // get points of contact
+        const userPOCs = userMatches
+            .filter(u => finalUserMatchSet.has(u.username))
+            .map(u => u.points_of_contact)
+        res.status(200).send(userPOCs)
     } catch (e) {
         res.status(500).send({ message : e.message })
     }
