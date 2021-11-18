@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../general/Navbar";
 import DateDisplay from "./date_display";
 
 export default function Swiper({ trip }) {

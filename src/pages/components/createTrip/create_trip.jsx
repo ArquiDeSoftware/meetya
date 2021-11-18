@@ -30,11 +30,44 @@ export default function CreateTrip() {
                   Dates available
                 </label>
                 <br></br>
+                <p> First date available: </p>
                 <input
                   type='text'
                   class='form-control'
                   id='floatingDateAvailable'
-                  placeholder='Date'
+                  placeholder='Day'
+                />
+                <input
+                  type='text'
+                  class='form-control'
+                  id='floatingDateAvailable'
+                  placeholder='Month'
+                />
+                <input
+                  type='text'
+                  class='form-control'
+                  id='floatingDateAvailable'
+                  placeholder='Year'
+                />
+                <br></br>
+                <p>Last Date Available: </p>
+                <input
+                  type='text'
+                  class='form-control'
+                  id='floatingDateAvailable'
+                  placeholder='Day'
+                />
+                <input
+                  type='text'
+                  class='form-control'
+                  id='floatingDateAvailable'
+                  placeholder='Month'
+                />
+                <input
+                  type='text'
+                  class='form-control'
+                  id='floatingDateAvailable'
+                  placeholder='Year'
                 />
               </div>
               <br></br>
@@ -58,14 +91,14 @@ export default function CreateTrip() {
                 </label>
                 <br></br>
                 <input
-                  type='text'
+                  type='number'
                   class='form-control'
                   id='eMin'
                   placeholder='Min'
                 />
 
                 <input
-                  type='text'
+                  type='number'
                   class='form-control'
                   id='eMax'
                   placeholder='Max'
