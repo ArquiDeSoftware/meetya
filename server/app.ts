@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import api from './routes';
+import bodyParser from 'body-parser'
 
 const app = express();
 
@@ -8,6 +9,9 @@ const app = express();
 
 // Middlewares
 app.use(express.json(), cors());
+
+app.use(bodyParser.urlencoded({ extended : false }))
+app.use(bodyParser.json())
 
 // Routes
 app.use('/api', api);
