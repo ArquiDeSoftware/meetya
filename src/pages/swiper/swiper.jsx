@@ -1,8 +1,18 @@
 import React from "react";
-import DateDisplay from "./date_display";
+import "./swiper.css";
+import DateDisplay from "../components/date_display";
 
 export default function Swiper({ trip }) {
   return (
+    <>
+    <a href='#' class='col btn btn-crear-trip'>
+      Crear Trip
+    </a>
+    <a href='#' class='col btn btn-matches'>
+      Matches
+    </a>
+    <h1>MeetYa</h1>
+    <h3>Swipe to find your travel buddy !</h3>
     <div class='container'>
       <div class='card'>
         <h5 class='card-header'>Destination</h5>
@@ -12,8 +22,17 @@ export default function Swiper({ trip }) {
           alt='...'
         />
         <div class='card-body'>
+          <br></br>
+          <div class='row'>
+            <a href='#' class='col btn btn-danger'>
+              Nay
+            </a>
+            <a href='#' class=' col btn btn-success'>
+              YAY!
+            </a>
+          </div>
           <div class='row '>
-            <h6 class='col mx-3 my-2 text-secondary'>Genre</h6>
+            <h6 class='col mx-3 my-2 text-secondary'>Gender: </h6>
             <span class='col'>
               <DateDisplay date={"2020-10-30T12:52:27+05:30"} />
             </span>
@@ -28,16 +47,11 @@ export default function Swiper({ trip }) {
             fugiat vel officia alias..
           </p>
 
-          <div class='row'>
-            <a href='#' class='col btn btn-danger'>
-              Nay
-            </a>
-            <a href='#' class=' col btn btn-success'>
-              YAY!
-            </a>
-          </div>
         </div>
       </div>
     </div>
+    <br></br>
+    <h3>Meet ya there</h3>
+    </>
   );
 }
