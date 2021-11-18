@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { addUser, getAllUsers } from '../controllers/userController'
 import { addTrip, getAllTrips } from '../controllers/tripController'
-import { addMatchCountingProxy } from '../controllers/matchCountingProxyController'
+import { addMatchCountingProxy, updateCountingProxy, getMatchCountingProxy } from '../controllers/matchCountingProxyController'
 import { addMatchProvider } from '../controllers/matchProviderController'
 import { addUserMatch, getUserMatches } from '../controllers/userMatchController'
 import { getMatchCache, getAllMatchCaches, addMatchCache } from '../controllers/matchCacheController'
@@ -19,6 +19,8 @@ api.get('/getAllTrips', getAllTrips)
 // match counting proxy
 api.post('/matchCountingProxy', addMatchCountingProxy)
 api.post('/matchProvider', addMatchProvider)
+api.post('/updateCountingProxy', updateCountingProxy)
+api.get('/getMatchCountingProxy', getMatchCountingProxy)
 // user match
 api.post('/userMatch', addUserMatch)
 api.post('/getUserMatches', getUserMatches)
