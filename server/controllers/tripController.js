@@ -3,19 +3,21 @@ const Trip = require('../models/Trip');
 async function addTrip(req, res) {
     try {
         const {
-            user_uuid,
+            username,
             destination,
             activities_preference,
             gender_preference,
-            date_range
+            start_date,
+            end_date
         } = req.body
         
         const trip = Trip({
-            user_uuid,
+            username,
             destination,
             activities_preference,
             gender_preference,
-            date_range
+            start_date,
+            end_date
         })
 
         const tripStored = await trip.save();
@@ -26,4 +28,13 @@ async function addTrip(req, res) {
     }
 }
 
-export { addTrip };
+async function getAllTrips(req, res) {
+    try {
+        const allTrips = await Trip.find({}).lean().exec()
+        res.status(200).send(allTrips)
+    } catch (e) {
+        res.status(500).send({ message : e.message })
+    }
+}
+
+export { addTrip, getAllTrips };
