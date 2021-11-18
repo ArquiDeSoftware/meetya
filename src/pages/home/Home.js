@@ -6,6 +6,7 @@ import "./home.css"
 import React, { useState, useEffect } from 'react';
 import { getTrips } from '../../services/trips'
 import { CircularProgress } from '@material-ui/core';
+import Swiper from '../swiper/swiper';
 
 export default function Home() {
 
@@ -29,16 +30,16 @@ export default function Home() {
   return (
     <>
       <Topbar />
-      <div className="homeContainer">
+      {/* <div className="homeContainer"> */}
         {isLoading ? 
           <div style={{"marginTop" : "40px", "textAlign" : "center"}}><CircularProgress size={50}/></div>
           :
-          <div>Hola</div>
+          <Swiper /> 
         }
         {/* <Sidebar />
         <Feed /> */}
         {/* <Rightbar/> */}
-      </div>
+      {/* </div> */}
     </>
   );
 }

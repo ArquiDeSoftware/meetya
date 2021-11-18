@@ -8,7 +8,7 @@ export default function Swiper({ trip }) {
     <a href='#' class='col btn btn-crear-trip'>
       Crear Trip
     </a>
-    <a href='#' class='col btn btn-matches'>
+    <a href='/createTrip' class='col btn btn-matches'>
       Matches
     </a>
     <h1>MeetYa</h1>
