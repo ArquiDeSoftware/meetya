@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./create_trip.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -40,15 +41,23 @@ export default function CreateTrip() {
     console.log(formattedData);
 
     axios.post('http://localhost:9000/api/trips', formattedData);
+    navigate('/');
   };
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const navigate = useNavigate();
+
+  const returnToMain = () => {
+    navigate('/');
+  }
+
   return (
     <>
       <link rel="stylesheet" href="create_trip.css"></link>
       <div className="container">
+        <button onClick={returnToMain}>Back</button>
         <div className="text-center card">
           <div className="container form-signin bg-light">
             <form onSubmit={handleSubmit(onSubmit)}>
