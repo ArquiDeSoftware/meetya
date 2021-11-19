@@ -19,7 +19,7 @@ export default function CreateTrip() {
 
   const onSubmit = (data) => {
     const formattedData = {
-      username: "diegomez",
+      username: "pepe",
       destination: data.location,
       activities_preference: {
         landmarks: data.aLandmarks,

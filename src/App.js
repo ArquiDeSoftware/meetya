@@ -1,7 +1,7 @@
 import './App.css';
 import Home from "./pages/home/Home";
 import CreateTrip from "./pages/components/createTrip/create_trip"
-import Matches from "./pages/components/matches"
+import Matches from "./pages/components/matches/matches"
 // import Details from "./pages/details/Details";
 import {
   BrowserRouter as Router,

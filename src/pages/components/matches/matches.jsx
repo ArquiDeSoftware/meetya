@@ -1,10 +1,12 @@
-import Topbar from "../../components/topbar/Topbar";
+import Topbar from "../../../components/topbar/Topbar";
 import React, { useState, useEffect } from 'react';
-import { getTrips } from '../../services/trips'
+import { getTrips } from '../../../services/trips'
 import { CircularProgress } from '@material-ui/core';
-import Swiper from '../swiper/swiper';
-import { getMatches } from '../../services/matches'
-import { updateCountingProxy } from '../../services/countingProxy'
+import Swiper from '../../swiper/swiper';
+import { getMatches } from '../../../services/matches'
+import { updateCountingProxy } from '../../../services/countingProxy'
+import "./matches.css";
+import Card from '../card'
 
 export default function Home() {
 
@@ -14,15 +16,17 @@ export default function Home() {
   const formattedData = {
     "trip_uuid" : "1",
     "username": "pepe",
-    "destination": "Los Mochis",
+    "destination": "Saltillo",
     "activities_preference": {
-      "hike": true
+      "tours": "true",
+      "hike" : "true"
     },
     "gender_preference": {
-      "male": true
+      "male": "true",
+      "female" : "true"
     },
     "start_date" : "2018-02-02",
-	  "end_date" : "2018-02-08"
+	  "end_date" : "2021-02-08"
   };
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export default function Home() {
           "match_count" : data ? data.length : 0,
 	        "total_matches" : data ? data.length : 0
         }
-        const savedCount = await updateCountingProxy(formattedUpdateCount)
+        await updateCountingProxy(formattedUpdateCount)
         setMatches(data)
         setIsLoading(false)
       })
@@ -48,7 +52,10 @@ export default function Home() {
         {isLoading ? 
           <div style={{"marginTop" : "40px", "textAlign" : "center"}}><CircularProgress size={50}/></div>
           :
-          matches.map((match, idx) => <div key={idx}>{match}</div>)
+          
+          matches.map((match, idx) => 
+              <Card key={idx} title = {match} subheader = {"Contacto"}/>
+          )
         }
     </>
   );
