@@ -4,6 +4,7 @@ import { getTrips } from '../../services/trips'
 import { CircularProgress } from '@material-ui/core';
 import Swiper from '../swiper/swiper';
 import { getMatches } from '../../services/matches'
+import { updateCountingProxy } from '../../services/countingProxy'
 
 export default function Home() {
 
@@ -27,8 +28,13 @@ export default function Home() {
   useEffect(() => {
     const fetchMatches = async () => {
       await getMatches(formattedData)
-      .then(trips => {
-        setMatches(trips.data)
+      .then(async ({data}) => {
+        const formattedUpdateCount = {
+          "match_count" : data ? data.length : 0,
+	        "total_matches" : data ? data.length : 0
+        }
+        const savedCount = await updateCountingProxy(formattedUpdateCount)
+        setMatches(data)
         setIsLoading(false)
       })
       .catch(err => console.log(err))
