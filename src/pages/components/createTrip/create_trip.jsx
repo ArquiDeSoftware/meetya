@@ -3,17 +3,45 @@ import { Form, FloatingLabel, Row, Col } from "react-bootstrap";
 import "./create_trip.css";
 export default function CreateTrip() {
   const [values, setValues] = useState({});
-  // const [preferences, setPreferences] = useState({});
+  const today = new Date();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setValues({ ...values, ["username"]: "Mock user" });
+    const startDate = new Date(
+      values["year-begin"] ?? today.getFullYear(),
+      (values["month-begin"] - 1) ?? today.getMonth(),
+      values["day-begin"] ?? today.getDate()
+    );
+    const endDate = new Date(
+      values["year-end"] ?? today.getFullYear(),
+      (values["month-end"] - 1) ?? today.getMonth(),
+      values["day-end"] ?? today.getDate()
+    );
     console.log(values);
+    const submission = {
+      destination: values["destination"],
+      startDate: startDate,
+      endDate: endDate,
+      activities_preference: values["activities-preference"],
+    };
+    console.log(JSON.stringify(submission));
+    await fetch("http://localhost:9000/trips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submission),
+    });
   };
 
   const handlePreferencesChange = (e) => {
     const target = e.target;
-    const preferences = { ...values.preferences, [target.value]: target.checked };
-    setValues({ ...values, ["preferences"]: preferences });
+    const preferences = {
+      ...values["activities-preference"],
+      [target.value]: target.checked,
+    };
+    setValues({ ...values, ["activities-preference"]: preferences });
   };
 
   const handleChange = (e) => {
@@ -36,7 +64,7 @@ export default function CreateTrip() {
                   class='form-control'
                   id='floatingLocation'
                   placeholder='Dream location'
-                  name='location'
+                  name='destination'
                   onChange={handleChange}
                 />
                 <label class='text-secondary' for='floatingLocation'>
@@ -62,6 +90,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='10'
+                      // defaultValue={today.getDate()}
                       name='day-begin'
                       onChange={handleChange}
                     />
@@ -75,6 +104,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='02'
+                      // defaultValue={today.getMonth()}
                       name='month-begin'
                       onChange={handleChange}
                     />
@@ -88,6 +118,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='2022'
+                      // defaultValue={today.getFullYear()}
                       name='year-begin'
                       onChange={handleChange}
                     />
@@ -106,6 +137,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='10'
+                      // defaultValue={today.getDate()}
                       name='day-end'
                       onChange={handleChange}
                     />
@@ -119,6 +151,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='02'
+                      // defaultValue={today.getMonth()}
                       name='month-end'
                       onChange={handleChange}
                     />
@@ -132,6 +165,7 @@ export default function CreateTrip() {
                     <Form.Control
                       type='number'
                       placeholder='2022'
+                      // defaultValue={today.getFullYear()}
                       name='year-end'
                       onChange={handleChange}
                     />
@@ -147,21 +181,21 @@ export default function CreateTrip() {
                 <div key='radio-gender' onChange={handleChange}>
                   <Form.Check
                     type='radio'
-                    name='gender'
+                    name='gender-preference'
                     id='gender-men'
                     label='Men'
                     value='Men'
                   />
                   <Form.Check
                     type='radio'
-                    name='gender'
+                    name='gender-preference'
                     id='gender-women'
                     label='Women'
                     value='Women'
                   />
                   <Form.Check
                     type='radio'
-                    name='gender'
+                    name='gender-preference'
                     id='gender-nonbinary'
                     label='Non-binary'
                     value='Non-binary'
