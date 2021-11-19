@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./create_trip.css";
 import { useForm } from "react-hook-form";
-// import DatePicker from "react-datepicker";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import axios from "axios";
 
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -39,6 +38,8 @@ export default function CreateTrip() {
     };
 
     console.log(formattedData);
+
+    axios.post('http://localhost:9000/api/trips', formattedData);
   };
 
   const [startDate, setStartDate] = useState(new Date());
