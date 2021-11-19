@@ -1,20 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Form, FloatingLabel, Row, Col } from "react-bootstrap";
 import "./create_trip.css";
 export default function CreateTrip() {
-
   const [values, setValues] = useState({});
+  // const [preferences, setPreferences] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(values);
   };
 
+  const handlePreferencesChange = (e) => {
+    const target = e.target;
+    const preferences = { ...values.preferences, [target.value]: target.checked };
+    setValues({ ...values, ["preferences"]: preferences });
+  };
+
   const handleChange = (e) => {
     const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.type ==='checkbox' ? target.value : target.name;
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [target.name]: target.value });
   };
 
   return (
@@ -147,7 +151,7 @@ export default function CreateTrip() {
                     id='gender-men'
                     label='Men'
                     value='Men'
-                    />
+                  />
                   <Form.Check
                     type='radio'
                     name='gender'
@@ -165,44 +169,48 @@ export default function CreateTrip() {
                 </div>
               </div>
 
-                <label class='mt-4 text-secondary' for='floatingPAge'>
-                  Age Preference
+              <label class='mt-4 text-secondary' for='floatingPAge'>
+                Age Preference
               </label>
               <Row>
-                  <FloatingLabel
-                    controlId='floatingInput'
-                    label='From'
-                    className='mb-3'
-                    as={Col}
-                  >
-                    <Form.Control
-                      type='number'
-                      placeholder='20'
-                      name='age-min'
-                      onChange={handleChange}
-                    />
-                  </FloatingLabel>
-                  <FloatingLabel
-                    controlId='floatingInput'
-                    label='To'
-                    className='mb-3'
-                    as={Col}
-                  >
-                    <Form.Control
-                      type='number'
-                      placeholder='30'
-                      name='age-max'
-                      onChange={handleChange}
-                    />
-                  </FloatingLabel>
-                  </Row>              
+                <FloatingLabel
+                  controlId='floatingInput'
+                  label='From'
+                  className='mb-3'
+                  as={Col}
+                >
+                  <Form.Control
+                    type='number'
+                    placeholder='20'
+                    name='age-min'
+                    onChange={handleChange}
+                  />
+                </FloatingLabel>
+                <FloatingLabel
+                  controlId='floatingInput'
+                  label='To'
+                  className='mb-3'
+                  as={Col}
+                >
+                  <Form.Control
+                    type='number'
+                    placeholder='30'
+                    name='age-max'
+                    onChange={handleChange}
+                  />
+                </FloatingLabel>
+              </Row>
 
               <div class=' mt-4'>
                 <label class='mx-2 text-secondary' for='floatingPActivities'>
                   Activities Preference
                 </label>
                 <br></br>
-                <div key='radio-activities' name='activities' onChange={handleChange}>
+                <div
+                  key='radio-activities'
+                  name='activities'
+                  onChange={handlePreferencesChange}
+                >
                   <Form.Check
                     type='checkbox'
                     name='activities'
